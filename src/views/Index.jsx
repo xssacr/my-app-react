@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { TabBar } from "antd-mobile";
 
+import CookBook from './cookbook/CookBook'
+
 import cookbook from "assets/images/cookbook.png";
 import cookbookActive from "assets/images/cookbook-active.png";
 import menu from "assets/images/menu.png";
@@ -8,9 +10,6 @@ import menuActive from "assets/images/menu-active.png";
 import more from "assets/images/more.png";
 import moreActive from "assets/images/more-active.png";
 
-const CookBook = () => {
-  return <h1>CookBook</h1>;
-};
 const Category = () => {
   return <h1>Category</h1>;
 };
