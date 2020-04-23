@@ -1,4 +1,5 @@
 import React from 'react';
+import 'assets/styles/reset.css'
 import Index from './views/Index'
 function App() {
   return (
