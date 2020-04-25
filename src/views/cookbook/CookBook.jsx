@@ -3,6 +3,7 @@ import HeaderBar from "components/headerbar/HeaderBar";
 import Search from "components/search/Search";
 import Swipper from "./components/Swipper";
 import HotCategory from "./components/HotCategory";
+import Top10 from "./components/Top10";
 import { get } from "utils/http";
 
 export default class CookBook extends Component {
@@ -11,6 +12,7 @@ export default class CookBook extends Component {
     this.state = {
       swipperData: [],
       hotcateData: [],
+      cookbooklist: [],
     };
   }
   render() {
@@ -26,6 +28,7 @@ export default class CookBook extends Component {
           placeholdertext="想吃什么搜什么,如:川菜"
         ></Search>
         <HotCategory datalist={this.state.hotcateData}></HotCategory>
+        <Top10 datalist={this.state.cookbooklist}></Top10>
       </div>
     );
   }
@@ -33,7 +36,12 @@ export default class CookBook extends Component {
   componentDidMount() {
     // 请求 Carousel 数据
     this.getCarouselData();
+
+    // 请求 热门分类的数据
     this.getHotCategoryData();
+
+    // 精品好菜的数据
+    this.getCookBookList();
   }
 
   async getCarouselData() {
@@ -48,6 +56,13 @@ export default class CookBook extends Component {
     console.log(result);
     this.setState({
       hotcateData: result.data.list,
+    });
+  }
+
+  async getCookBookList() {
+    let result = await get("/api/cookbooklist");
+    this.setState({
+      cookbooklist: result.data.data,
     });
   }
 }
