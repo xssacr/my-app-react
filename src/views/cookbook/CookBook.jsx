@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import HeaderBar from "components/headerbar/HeaderBar.jsx";
-import Swipper from "./swipper/Swipper";
+import HeaderBar from "components/headerbar/HeaderBar";
+import Search from 'components/search/Search'
+import Swipper from "./components/Swipper";
 import { get } from "utils/http";
 
 export default class CookBook extends Component {
@@ -15,6 +16,7 @@ export default class CookBook extends Component {
       <div>
         <HeaderBar>菜谱大全</HeaderBar>
         <Swipper datalist={this.state.swipperData}></Swipper>
+        <Search hasborder={true} conbgcolor={'#f5f5f5'} inputbgcolor={'#fff'} bordercolor={'#b28969'} placeholdertext="想吃什么搜什么,如:川菜"></Search>
       </div>
     );
   }
