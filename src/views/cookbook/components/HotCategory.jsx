@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Grid from "components/grid/Grid";
-import "../cookbook.css";
+import "../cookbook.scss";
 export default class HotShowing extends Component {
   render() {
     return (

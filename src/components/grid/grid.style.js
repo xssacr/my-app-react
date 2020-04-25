@@ -11,14 +11,16 @@ const GridContainer = styled.div`
       justify-content:center;
       align-items:center;
       width: ${({ col }) => 100 / col}%;
-      padding: 0.1rem;
-      padding-top:0;
+      padding: 0 0.1rem;
       img{
         width: 100%;
         border-radius: 0.2rem;
       }
       span{
         display:block;
+        width:100%;
+        text-align:center;
+        height:.55rem;
         line-height:.55rem;
       }
     }
