@@ -29,6 +29,8 @@ const InputContainer = styled.div`
   }
   input{
     width: 4rem;
+    background-color:${({ inputbgcolor }) => inputbgcolor};
+    border:0;
   }
 `
 

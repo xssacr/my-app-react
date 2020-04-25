@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { TabBar } from "antd-mobile";
 
-import CookBook from './cookbook/CookBook'
-import Category from './category/Category'
+import CookBook from "./cookbook/CookBook";
+import Category from "./category/Category";
 
 import cookbook from "assets/images/cookbook.png";
 import cookbookActive from "assets/images/cookbook-active.png";
@@ -11,28 +11,27 @@ import menuActive from "assets/images/menu-active.png";
 import more from "assets/images/more.png";
 import moreActive from "assets/images/more-active.png";
 
-
 const More = () => {
   return <h1>More</h1>;
 };
 
 const tabbarList = [
   {
-    id: 1,
+    id: "cookbook",
     title: "菜谱大全",
     icon: cookbook,
     icon_active: cookbookActive,
     components: CookBook,
   },
   {
-    id: 2,
+    id: "category",
     title: "菜单",
     icon: menu,
     icon_active: menuActive,
     components: Category,
   },
   {
-    id: 3,
+    id: "more",
     title: "更多",
     icon: more,
     icon_active: moreActive,
@@ -44,7 +43,7 @@ export default class Index extends Component {
   constructor() {
     super();
     this.state = {
-      selectedTab: 1,
+      selectedTab: "cookbook",
       hidden: false,
       tabbarList,
     };
@@ -86,6 +85,8 @@ export default class Index extends Component {
                   this.setState({
                     selectedTab: item.id,
                   });
+                  let { path } = this.props.match;
+                  this.props.history.push(path + "/" + item.id);
                 }}
                 data-seed="logId"
               >
