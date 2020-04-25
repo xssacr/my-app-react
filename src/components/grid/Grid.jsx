@@ -7,8 +7,8 @@ export default class Grid extends Component {
         <ul>
           {this.props.list.map((item, index) => {
             return (
-              <li key={index} onClick={this.props.itemCilck.bind(this,item)}>
-                <img src={item.img} alt="" />
+              <li key={index} onClick={this.props.itemCilck.bind(this, item)}>
+                <img src={item.img} alt={item.title} />
                 <span>{item.title}</span>
               </li>
             );
