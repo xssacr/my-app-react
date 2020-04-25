@@ -11,8 +11,13 @@ export default class Grid extends Component {
     return (
       <GridContainer col={this.props.col}>
         <ul>
-          {this.state.list.map((item, index) => {
-            return <li key={index}>{item}</li>;
+          {this.props.list.map((item, index) => {
+            return (
+              <li key={index}>
+                <img src={item.img} alt="" />
+                <span>{item.title}</span>
+              </li>
+            );
           })}
         </ul>
       </GridContainer>

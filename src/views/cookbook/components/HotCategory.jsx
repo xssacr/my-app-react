@@ -6,7 +6,7 @@ export default class HotShowing extends Component {
     return (
       <div className="hotcate">
         <h1>热门分类</h1>
-        <Grid col={4}></Grid>
+        <Grid col={4} list={this.props.datalist}></Grid>
       </div>
     );
   }
