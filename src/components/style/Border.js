@@ -17,6 +17,7 @@ const Border = ({ Component, borderColor = "", radius = 0, borderWidth = '1px' }
         transform-origin:0 0;
         /* 设置伪元素不响应鼠标事件 */
         pointer-events:none; 
+        z-index:1;
         @media (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5) {
         height: 150%;
         width: 150%;

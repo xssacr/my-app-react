@@ -1,11 +1,39 @@
-import React, { Component } from 'react'
-
+import React, { Component } from "react";
+import CateList from "components/catelist/CateList";
 export default class Classify extends Component {
+  constructor() {
+    super();
+    this.state = {
+      nav: "",
+    };
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    let nav = "";
+    if (state.nav) {
+      nav = state.nav;
+    } else {
+      nav = Object.keys(props.list)[0];
+    }
+
+    return {
+      nav,
+    };
+  }
+
+  changeNavHandler = (item) => {
+    this.setState({
+      nav: item,
+    });
+  };
+
   render() {
     return (
-      <div>
-        分类 page
-      </div>
-    )
+      <CateList
+        {...this.props}
+        nav={this.state.nav}
+        changeNav={this.changeNavHandler}
+      ></CateList>
+    );
   }
 }

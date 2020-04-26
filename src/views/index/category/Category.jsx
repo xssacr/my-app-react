@@ -7,11 +7,15 @@ import Material from "./components/Material";
 import { Route, Redirect, Switch, withRouter } from "react-router-dom";
 import "./category.scss";
 
+import { get } from "utils/http";
+
 class Category extends Component {
   constructor() {
     super();
     this.state = {
       dir: "left",
+      classifyList: [],
+      materialList: [],
     };
   }
 
@@ -63,13 +67,34 @@ class Category extends Component {
         ></Search>
 
         <Switch>
-          <Route path={`${path}/classify`} component={Classify}></Route>
-          <Route path={`${path}/material`} component={Material}></Route>
+          <Route path={`${path}/classify`}>
+            <Classify list={this.state.classifyList}></Classify>
+          </Route>
+
+          <Route
+            path={`${path}/material`}
+            render={() => {
+              return <Material list={this.state.materialList}></Material>;
+            }}
+          ></Route>
 
           <Redirect exact from={path} to={`${path}/classify`}></Redirect>
         </Switch>
       </div>
     );
+  }
+
+  componentDidMount() {
+    // 请求数据接口
+    this.getClassifyList();
+  }
+
+  async getClassifyList() {
+    let result = await get("/api/category");
+    this.setState({
+      classifyList: result.data.data.category,
+      materialList: result.data.data.material,
+    });
   }
 }
 

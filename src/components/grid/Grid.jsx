@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { GridContainer } from "./grid.style";
 export default class Grid extends Component {
   render() {
+    // 开放封闭的原则，一旦封装了，不建议修改源码,如果可以修改，建议提供接口
     return (
       <GridContainer col={this.props.col}>
         <ul>
