@@ -3,6 +3,7 @@ import 'assets/styles/reset.css'
 import Index from './views/index/Index'
 import List from './views/list/List'
 import { Route, BrowserRouter as Router, Redirect, Switch } from 'react-router-dom'
+
 function App() {
   return (
     <Router>

@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import Grid from "components/grid/Grid";
 import "../cookbook.scss";
-export default class HotShowing extends Component {
+import { withRouter } from "react-router-dom";
+
+class HotShowing extends Component {
   clickHandler = (item) => {
-    console.log(item);
+    // 视图跳转
+    this.props.history.push('/list');
   };
 
   render() {
@@ -19,3 +22,5 @@ export default class HotShowing extends Component {
     );
   }
 }
+
+export default withRouter(HotShowing);
