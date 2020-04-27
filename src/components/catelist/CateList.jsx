@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { CategoryContainer,BorderCateContainer } from "./CateList.style";
+import {BorderCateContainer } from "./CateList.style";
 
 export default class CateList extends Component {
   render() {
