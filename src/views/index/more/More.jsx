@@ -1,21 +1,21 @@
 import React, { Component } from "react";
 import { Switch } from "antd-mobile";
-import { MapConsumer } from "context/MapContext";
+import connect from "../redux/connect";
 
-export default class More extends Component {
-
+class More extends Component {
   render() {
+    let { isShowMap, changeMapStatus } = this.props;
     return (
-      <MapConsumer>
-        {({ isShowMap, changeStates }) => {
-          return (
-            <>
-              是否展示地图:
-              <Switch checked={isShowMap} onChange={changeStates}></Switch>
-            </>
-          );
-        }}
-      </MapConsumer>
+      <>
+        是否展示地图:
+        <Switch checked={isShowMap} onChange={changeMapStatus}></Switch>
+      </>
     );
   }
+
+  componentDidMount() {
+    console.log(this.props);
+  }
 }
+
+export default connect(More);

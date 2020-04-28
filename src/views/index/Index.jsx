@@ -6,7 +6,8 @@ import Category from "./category/Category";
 import MapComponent from "./map/Map";
 import More from "./more/More";
 
-import { MapConsumer } from "context/MapContext";
+// import { MapConsumer } from "context/MapContext";
+import connect from "./redux/connect";
 
 import cookbook from "assets/images/cookbook.png";
 import cookbookActive from "assets/images/cookbook-active.png";
@@ -51,7 +52,7 @@ const mapTab = {
 
 // tabbarList.splice(2, 0, mapTab);
 
-export default class Index extends Component {
+class Index extends Component {
   constructor() {
     super();
     this.state = {
@@ -61,81 +62,78 @@ export default class Index extends Component {
     };
   }
   render() {
-   
+    let { isShowMap } = this.props;
+    console.log(this.props);
+    if (isShowMap) {
+      // 显示
+      if (this.state.tabbarList.length === 3) {
+        // 插入数据
+        this.state.tabbarList.splice(2, 0, mapTab);
+      }
+    } else {
+      // 隐藏
+      if (this.state.tabbarList.length === 4) {
+        // 删除数据
+        this.state.tabbarList.splice(2, 1);
+      }
+    }
+
     return (
-      
-      <MapConsumer>
-        {({isShowMap}) => {
-          if (isShowMap) {
-            // 显示
-            if (this.state.tabbarList.length === 3) {
-              // 插入数据
-              this.state.tabbarList.splice(2,0,mapTab)
-            }
-          } else {
-            // 隐藏
-            if (this.state.tabbarList.length === 4) {
-              // 删除数据
-              this.state.tabbarList.splice(2, 1);
-            }
-          }
-          return (
-            <div
-              style={{
-                position: "fixed",
-                height: "100%",
-                width: "100%",
-                top: 0,
-              }}
-            >
-              <TabBar
-                unselectedTintColor="#949494"
-                tintColor="#33A3F4"
-                barTintColor="white"
-                hidden={this.state.hidden}
-              >
-                {this.state.tabbarList.map((item) => {
-                  return (
-                    <TabBar.Item
-                      title={item.title}
-                      key={item.id}
-                      icon={
-                        <div
-                          style={{
-                            width: "22px",
-                            height: "22px",
-                            background: `url(${item.icon}) center center /  21px 21px no-repeat`,
-                          }}
-                        />
-                      }
-                      selectedIcon={
-                        <div
-                          style={{
-                            width: "22px",
-                            height: "22px",
-                            background: `url(${item.icon_active}) center center /  21px 21px no-repeat`,
-                          }}
-                        />
-                      }
-                      selected={this.state.selectedTab === item.id}
-                      onPress={() => {
-                        this.setState({
-                          selectedTab: item.id,
-                        });
-                        let { path } = this.props.match;
-                        this.props.history.push(path + "/" + item.id);
-                      }}
-                      data-seed="logId"
-                    >
-                      {<item.components></item.components>}
-                    </TabBar.Item>
-                  );
-                })}
-              </TabBar>
-            </div>
-          );
+      <div
+        style={{
+          position: "fixed",
+          height: "100%",
+          width: "100%",
+          top: 0,
         }}
-      </MapConsumer>
+      >
+        <TabBar
+          unselectedTintColor="#949494"
+          tintColor="#33A3F4"
+          barTintColor="white"
+          hidden={this.state.hidden}
+        >
+          {this.state.tabbarList.map((item) => {
+            return (
+              <TabBar.Item
+                title={item.title}
+                key={item.id}
+                icon={
+                  <div
+                    style={{
+                      width: "22px",
+                      height: "22px",
+                      background: `url(${item.icon}) center center /  21px 21px no-repeat`,
+                    }}
+                  />
+                }
+                selectedIcon={
+                  <div
+                    style={{
+                      width: "22px",
+                      height: "22px",
+                      background: `url(${item.icon_active}) center center /  21px 21px no-repeat`,
+                    }}
+                  />
+                }
+                selected={this.state.selectedTab === item.id}
+                onPress={() => {
+                  this.setState({
+                    selectedTab: item.id,
+                  });
+                  let { path } = this.props.match;
+                  this.props.history.push(path + "/" + item.id);
+                }}
+                data-seed="logId"
+              >
+                {<item.components></item.components>}
+              </TabBar.Item>
+            );
+          })}
+        </TabBar>
+      </div>
     );
   }
 }
+
+export default connect(Index);

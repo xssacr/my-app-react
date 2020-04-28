@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import { MapProvider } from './context/MapContext';
+
+import store from './store/store'
+import { Provider } from 'react-redux'
 
 ReactDOM.render(
-  <MapProvider>
+  <Provider store={store}>
     <App />
-  </MapProvider>,
+  </Provider>,
   document.getElementById('root')
 );
 

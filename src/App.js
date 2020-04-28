@@ -11,7 +11,7 @@ function App() {
         <Route path="/index" component={Index}></Route>
         <Route path="/list" component={List}></Route>
 
-        <Redirect from="/" exact to="/index/category/classify"></Redirect>
+        <Redirect from="/" exact to="/index"></Redirect>
 
         <Route path="*" render={
           () => {
