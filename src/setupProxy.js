@@ -5,4 +5,12 @@ module.exports = function (app) {
     target: 'http://localhost:8888',
     changeOrigin: true
   }))
+
+  app.use('/apilist', createProxyMiddleware({
+    target: 'http://localhost:8888',
+    changeOrigin: true,
+    pathRewrite: {
+      '^/apilist': ''
+    }
+  }))
 }
