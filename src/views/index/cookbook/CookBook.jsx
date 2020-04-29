@@ -5,12 +5,12 @@ import Swipper from "./components/Swipper";
 import HotCategory from "./components/HotCategory";
 import Top10 from "./components/Top10";
 import { get } from "utils/http";
+import connect from "./redux/connect";
 
-export default class CookBook extends Component {
+class CookBook extends Component {
   constructor() {
     super();
     this.state = {
-      swipperData: [],
       hotcateData: [],
       cookbooklist: [],
     };
@@ -19,7 +19,7 @@ export default class CookBook extends Component {
     return (
       <div>
         <HeaderBar>菜谱大全</HeaderBar>
-        <Swipper datalist={this.state.swipperData}></Swipper>
+        <Swipper datalist={this.props.swipperList}></Swipper>
         <Search
           hasborder={true}
           conbgcolor={"#f5f5f5"}
@@ -44,10 +44,11 @@ export default class CookBook extends Component {
     this.getCookBookList();
   }
 
-  async getCarouselData() {
-    let result = await get("/api/swipper");
-    this.setState({
-      swipperData: result.data.data,
+  getCarouselData() {
+    this.props.loadData({
+      _page: 1,
+      _limit: 10,
+      q: "",
     });
   }
 
@@ -66,3 +67,5 @@ export default class CookBook extends Component {
     });
   }
 }
+
+export default connect(CookBook);

@@ -22,7 +22,7 @@ export default class Swipper extends Component {
             }}
           >
             <img
-              src={item.url}
+              src={item.img}
               alt=""
               style={{ width: "100%", verticalAlign: "top" }}
               onLoad={() => {

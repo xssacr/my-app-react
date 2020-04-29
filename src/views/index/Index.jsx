@@ -51,7 +51,7 @@ const mapTab = {
 };
 
 // tabbarList.splice(2, 0, mapTab);
-
+@connect
 class Index extends Component {
   constructor() {
     super();
@@ -136,4 +136,5 @@ class Index extends Component {
   }
 }
 
-export default connect(Index);
+// export default connect(Index);
+export default Index;

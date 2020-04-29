@@ -16,6 +16,8 @@ class List extends Component {
     const dataSource = new ListView.DataSource({
       rowHasChanged: (row1, row2) => row1 !== row2,
     });
+
+
     this.page = 1; // 第几页
     this.limit = 10; // 每页展示10条数据
     this.state = {
@@ -27,18 +29,22 @@ class List extends Component {
     this.props.history.go(-1);
   };
 
+  // 和 state 中的 keyword 做一个双向绑定
   changeHandler = (event) => {
     this.setState({
       keyword: event.target.value,
     });
   };
 
+  // 滑动到底部的方法
   onEndReached = () => {
+    // 判断是不是最后一页
     if (this.props.isEnd) {
       // 提示
       Toast.info("没有更多数据了", 1);
       return;
     }
+    // 重新发请求
     this.props.loadData({
       _page: ++this.page,
       _limit: this.limit,
@@ -46,6 +52,7 @@ class List extends Component {
     });
   };
 
+  // 点击搜索时,也需要重新发送请求
   searchHandler = () => {
     this.page = 1;
     this.props.loadData({
@@ -53,21 +60,22 @@ class List extends Component {
       _limit: this.limit,
       q: this.state.keyword,
     });
-  }
+  };
 
   render() {
-    const row = (row, sectionID, rowID) => {
+
+    // 列表中每一行的组件
+    const row = (rowData, sectionID, rowID) => {
       return (
         <ItemContainer>
           <div>
-            <img src={row.img} alt="" />
+            <img src={rowData.img} alt="" />
           </div>
           <div>
-            <h3>{row.name}</h3>
-            <TextBlockEllipsis>{row.burdens}</TextBlockEllipsis>
+            <h3>{rowData.name}</h3>
+            <TextBlockEllipsis>{rowData.burdens}</TextBlockEllipsis>
             <p>
-              {" "}
-              {row.all_click} 浏览 {row.favorites}收藏
+              {rowData.all_click} 浏览 {rowData.favorites}收藏
             </p>
           </div>
         </ItemContainer>
@@ -78,7 +86,9 @@ class List extends Component {
       <ListContainer>
         <NavBar
           icon={<Icon type="left" />}
-          rightContent={<Icon key="0" type="search" onClick={this.searchHandler}/>}
+          rightContent={
+            <Icon key="0" type="search" onClick={this.searchHandler} />
+          }
           onLeftClick={this.leftClick}
         >
           <input
